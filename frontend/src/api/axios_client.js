@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "../utils/token";
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://sportify-khaki.vercel.app/api",
 });
 
 axiosClient.interceptors.request.use((config) => {
