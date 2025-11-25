@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const http = require("http");
 
 const authRoutes = require("./Routes/Auth");
 const userRoutes = require("./Routes/User");
@@ -21,7 +20,7 @@ mongoose
   .catch(() => console.log("Check your DB"));
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "*",
   credentials: true,
 };
 
@@ -33,9 +32,4 @@ app.use(cors(corsOptions));
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 
-const port = process.env.PORT || 8000;
-const server = http.createServer(app);
-
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+module.exports = app;
