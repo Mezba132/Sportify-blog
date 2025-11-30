@@ -34,18 +34,18 @@ exports.signin = async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        error: "please sign up",
+        err: "please sign up",
       });
     }
 
     if (!user.authenticate(password)) {
       return res.status(401).json({
-        error: "Email and Password dont match",
+        err: "Email and Password dont match",
       });
     }
 
     const token = jwt.sign(
-      { _id: user._id, name: user.name, email: user.email },
+      { _id: user._id, name: user.name, email: user.email, role: user.role },
       process.env.JWT_SECRET
     );
     res.cookie("CookieToken", token, { expire: new Date() + 9999 });

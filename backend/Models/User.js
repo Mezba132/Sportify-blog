@@ -17,6 +17,12 @@ const userSchema = new Schema(
       maxlength: 32,
       unique: true,
     },
+    role: {
+      type: String,
+      required: true,
+      enum: ["Admin", "User"],
+      default: "User",
+    },
     hash_password: {
       type: String,
       required: true,

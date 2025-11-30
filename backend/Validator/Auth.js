@@ -21,6 +21,8 @@ exports.userSignupValidator = [
     .isLength({ min: 4, max: 50 })
     .withMessage("Password must be between 4 to 50 characters"),
 
+  check("role").notEmpty().withMessage("Role is required"),
+
   (req, res, next) => {
     const errors = validationResult(req);
 

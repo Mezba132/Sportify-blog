@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const { requireSignin, isAuth } = require("../Middleware/auth");
+const { requireSignin } = require("../Middleware/Auth");
 const { userById } = require("../Controller/UserController");
 
-router.get("/user/:id", requireSignin, isAuth, (req, res) => {
+router.get("/user/:userId", requireSignin, (req, res) => {
   res.json({
     user: req.profile,
   });
 });
 
-router.param("id", userById);
+router.param("userId", userById);
 
 module.exports = router;

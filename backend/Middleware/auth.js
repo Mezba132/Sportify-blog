@@ -1,5 +1,4 @@
 const { expressjwt } = require("express-jwt");
-const { errorHandler } = require("../Helper/ErrorHandler");
 
 exports.requireSignin = expressjwt({
   secret: process.env.JWT_SECRET,
@@ -7,19 +6,11 @@ exports.requireSignin = expressjwt({
   requestProperty: "auth",
 });
 
-exports.isAuth = (req, res, next) => {
-  try {
-    const authorized =
-      req.profile && req.auth && req.profile._id.toString() === req.auth._id;
-    if (!authorized) {
-      return res.status(403).json({
-        error: "Access denied",
-      });
-    }
-    next();
-  } catch (err) {
-    return res.status(400).json({
-      err: errorHandler(err),
+exports.isAdmin = (req, res, next) => {
+  if (!req.auth || req.auth.role !== "Admin") {
+    return res.status(403).json({
+      error: "Admin resource! Access denied",
     });
   }
+  next();
 };
