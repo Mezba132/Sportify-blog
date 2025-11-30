@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import authApi from "../../api/auth_api";
 
 export const loginUser = createAsyncThunk(
-  "auth/login",
+  "/login",
   async (data, { rejectWithValue }) => {
     try {
       const res = await authApi.login(data);
@@ -14,7 +14,7 @@ export const loginUser = createAsyncThunk(
 );
 
 export const registerUser = createAsyncThunk(
-  "auth/register",
+  "/register",
   async (data, { rejectWithValue }) => {
     try {
       const res = await authApi.register(data);
